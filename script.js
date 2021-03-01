@@ -1,47 +1,35 @@
-
+//these variables use jquery to tap into html IDs
+var firstInputEL = $('#nine-am');
+var firstOutputEL =$("#first-event");
 
 
 //this jqueries to get the currentDay id from the html
+//this uses moment to format the string variable into the updated current day
 let todayIs = moment().format("dddd");
 $("#currentDay").text(todayIs);
-
-//this uses moment to format the string variable into the updated current day
-
 console.log(todayIs);
 
 
-signUpButton.addEventListener("click", function(event) {
-    event.preventDefault();
-  
-    var email = document.querySelector("#email").value;
-    var password = document.querySelector("#password").value;
-  
-    if (email === "") {
-      displayMessage("error", "Email cannot be blank");
-    } else if (password === "") {
-      displayMessage("error", "Password cannot be blank");
-    } else {
-      displayMessage("success", "Registered successfully");
-  
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      renderLastRegistered();
-    }
-  });
 
-function renderLastRegistered() {
-    var email = localStorage.getItem("email");
-    var password = localStorage.getItem("password");
-  
-    if (!email || !password) {
-      return;
-    }
-  
-    userEmailSpan.textContent = email;
-    userPasswordSpan.textContent = password;
-  }
-  
+$('#nine-save').click(setStorage);
 
+  function setStorage(){  
+    console.log("button clicked")
+    var input = firstInputEL.value;
+
+    localStorage.setItem("input", input);
+    displayFirst();
+  };
+
+  function displayFirst() {
+    var firstEvent = localStorage.getItem("input")
+
+      if(!firstEvent){
+        return;
+      }
+
+      firstOutputEL.textContent = firstEvent;
+  };
 
 
 
