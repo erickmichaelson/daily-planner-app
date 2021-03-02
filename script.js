@@ -1,5 +1,5 @@
 //these variables use jquery to tap into html IDs
-var firstInputEL = $('#nine-am');
+const firstInputEL = $('#nine-am');
 var firstOutputEL =$("#first-event");
 
 
@@ -8,6 +8,33 @@ var firstOutputEL =$("#first-event");
 let todayIs = moment().format("dddd");
 $("#currentDay").text(todayIs);
 console.log(todayIs);
+
+//this function was supposed to input what is typed in the first input time block box
+firstInputEL.addEventListener('input', letter => {
+  console.log(letter);
+  firstOutputEL.textContent = letter.target.value
+});
+
+
+//this creates a variable that is attached the time-block class using jquery
+let timeBlock = $(".time-block");
+
+
+  timeBlock.each(function(){
+    //this conditional statement identifies each time block relative to the hour of day.
+    if(currentTime === timeBlock) {
+      $(this).addClass("present");
+      $(this).removeClass("future");
+      $(this).removeClass("past");
+    } else if(currentTime < timeBlock) {
+      $(this).addClass("past");
+      $(this).removeClass("present");
+      $(this).removeClass("future");
+    } else {
+      $(this).addClass("future");
+      $(this).removeClass("past");
+      $(this).removeClass("present");
+    }});
 
 
 
@@ -29,7 +56,7 @@ $('#nine-save').click(setStorage);
       }
 
       firstOutputEL.textContent = firstEvent;
-  };
+    };
 
 
 
